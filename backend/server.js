@@ -2,11 +2,12 @@ const express = require('express');
 const router = require('./routes/recipeRoute');
 const connectDb = require('./config/connectionDb');
 require('dotenv').config();
-
+const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // Data base connection
 connectDb();
