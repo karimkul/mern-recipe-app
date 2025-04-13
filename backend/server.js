@@ -12,6 +12,7 @@ app.use(cors());
 // Data base connection
 connectDb();
 
+app.use('/api', require('./routes/userRoute'));
 app.use('/api/recipe', router);
 
 app.listen(PORT, (req, res) => {
