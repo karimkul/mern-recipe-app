@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom";
-import foodImg from "../assets/foodRecipe.png";
 import { BsFillStopwatchFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 
@@ -12,7 +11,7 @@ function RecipeItems() {
                     return (
                         <div key={index} className="card">
                             <img
-                                src={foodImg}
+                                src={`http://localhost:5000/${item.coverImage}`}
                                 alt="Delicious food on a plate"
                                 width="120px"
                                 height="100px"
@@ -21,7 +20,7 @@ function RecipeItems() {
                                 <div className="title">{item.title}</div>
                                 <div className="icons">
                                     <div className="timer">
-                                        <BsFillStopwatchFill /> 30mins
+                                        <BsFillStopwatchFill /> {item.time}
                                     </div>
                                     <FaHeart />
                                 </div>

@@ -7,7 +7,7 @@ const recipeSchema = new mongoose.Schema(
       required: [true, 'Title is required.'],
     },
     ingredients: {
-      type: String,
+      type: Array,
       required: [true, 'Ingredients are required.'],
     },
     instructions: {

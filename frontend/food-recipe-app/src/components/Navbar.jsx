@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "./Modal";
 import InputForm from "./InputForm";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-
-    const token = localStorage.getItem("token");
-    const [isLogin, setIsLogin] = useState(token ? false : true);
-
-    useEffect(() => {
-        setIsLogin(token ? false : true);
-    }, [token]);
+    const [isLogin, setIsLogin] = useState(() => {
+        // Initialize from localStorage once
+        return !localStorage.getItem("token");
+    });
 
     const checkLogin = () => {
-        if (token) {
+        if (!isLogin) {
+            // Logging out
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             setIsLogin(true);
         } else {
+            // Open modal for login
             setIsOpen(true);
         }
     };
@@ -48,7 +47,12 @@ function Navbar() {
             </header>
             {isOpen && (
                 <Modal onClose={() => setIsOpen(false)}>
-                    <InputForm setIsOpen={() => setIsOpen(false)} />
+                    <InputForm
+                        setIsOpen={() => {
+                            setIsOpen(false);
+                            setIsLogin(false); // user logged in successfully
+                        }}
+                    />
                 </Modal>
             )}
         </>

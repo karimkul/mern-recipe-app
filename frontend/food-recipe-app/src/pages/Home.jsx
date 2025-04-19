@@ -1,9 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import foodRecipe from "../assets/foodRecipe.png";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import RecipeItems from "../components/RecipeItems";
 
 function Home() {
+    const navigate = useNavigate();
     return (
         <>
             <section className="home">
@@ -16,7 +16,9 @@ function Home() {
                         laboriosam magni voluptates enim. Unde perferendis nulla
                         obcaecati ipsum earum?
                     </h5>
-                    <button>Share your recipe</button>
+                    <button onClick={() => navigate("/addRecipe")}>
+                        Share your recipe
+                    </button>
                 </div>
                 <div className="right">
                     <img

@@ -7,8 +7,6 @@ function InputForm({ setIsOpen }) {
     const [isSignUp, setIsSignUp] = useState(false);
     const [error, setError] = useState("");
 
-    console.log(`Email: ${email}     Password: ${password}`);
-
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const endPoint = isSignUp ? "api/signUp" : "api/login";

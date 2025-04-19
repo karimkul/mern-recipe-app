@@ -14,15 +14,16 @@ const userSignUp = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      res.status(409).json({ message: 'Email is already exist' });
+      return res.status(409).json({ message: 'Email is already exist' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({ email, password: hashedPassword });
 
-    const token = jwt.sign({ email, id: newUser._id }, process.env.SECRET_KEY);
-    // { expiresIn: '1hr', }
+    const token = jwt.sign({ email, id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '1hr',
+    });
 
     return res.status(201).json({
       message: 'User created successfully',
@@ -63,7 +64,7 @@ const userLogin = async (req, res) => {
 
     const token = jwt.sign(
       { email: user.email, id: user._id },
-      process.env.SECRET_KEY,
+      process.env.JWT_SECRET,
       {
         expiresIn: '1hr',
       }
